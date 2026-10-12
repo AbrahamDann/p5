@@ -1,7 +1,6 @@
 /* Week 5 Portfolio - Starter Styles
    Students will transform this with Flexbox and Grid */
 
-/* CSS Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +8,6 @@
 }
 
 :root {
-    /* Color Variables */
     --primary-color: #667eea;
     --secondary-color: #764ba2;
     --text-dark: #2d3748;
@@ -18,17 +16,17 @@
     --bg-dark: #2d3748;
     --white: #ffffff;
     --border-color: #e2e8f0;
-
-    /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 3rem;
     --spacing-xl: 4rem;
-
-    /* Typography */
     --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     --font-mono: 'Courier New', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -38,14 +36,16 @@ body {
     background: var(--white);
 }
 
-/* Container */
+#root {
+    min-height: 100vh;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
 
-/* Section Styles */
 .section {
     padding: var(--spacing-xl) 0;
 }
@@ -54,7 +54,6 @@ body {
     background: var(--bg-light);
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     margin-bottom: var(--spacing-sm);
@@ -78,7 +77,6 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Navigation Bar - TO BE ENHANCED WITH FLEXBOX */
 #navbar {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: var(--spacing-sm) var(--spacing-md);
@@ -86,6 +84,10 @@ a:hover {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
 }
 
 .nav-brand {
@@ -96,11 +98,13 @@ a:hover {
 
 .nav-menu {
     list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
 }
 
 .nav-menu li {
     display: inline-block;
-    margin-left: var(--spacing-md);
 }
 
 .nav-link {
@@ -111,17 +115,18 @@ a:hover {
     transition: background 0.3s ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     background: rgba(255,255,255,0.1);
     color: var(--white);
 }
 
-/* Mobile Menu Toggle */
 .nav-toggle {
     display: none;
     width: 30px;
     height: 30px;
     cursor: pointer;
+    position: relative;
 }
 
 .nav-toggle span {
@@ -133,12 +138,31 @@ a:hover {
     transition: 0.3s;
 }
 
-/* Hero Section - TO BE ENHANCED WITH FLEXBOX */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     padding: var(--spacing-xl) var(--spacing-md);
     min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .hero-title {
@@ -158,7 +182,12 @@ a:hover {
     margin-bottom: var(--spacing-md);
 }
 
-/* Buttons */
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
 .btn {
     display: inline-block;
     padding: 0.75rem 2rem;
@@ -191,9 +220,11 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* About Section - TO BE ENHANCED WITH GRID */
 .about-grid {
     margin-top: var(--spacing-md);
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: 2fr 1fr;
 }
 
 .about-text {
@@ -230,9 +261,11 @@ a:hover {
     color: white;
 }
 
-/* Skills Section - TO BE TRANSFORMED WITH GRID */
 .skills-grid {
     margin-top: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .skill-card {
@@ -294,8 +327,6 @@ a:hover {
     color: var(--text-light);
 }
 
-/* Projects Section - TO BE ENHANCED WITH GRID */
-/* Filter Buttons - Week 7 Addition */
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -329,6 +360,9 @@ a:hover {
 
 .projects-grid {
     margin-top: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .project-card {
@@ -337,7 +371,7 @@ a:hover {
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: var(--spacing-md);
-    transition: transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .project-card:hover {
@@ -364,10 +398,7 @@ a:hover {
 
 .project-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: rgba(0,0,0,0.8);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -441,7 +472,6 @@ a:hover {
     margin-bottom: var(--spacing-xs);
 }
 
-/* Contact Form - TO BE ENHANCED WITH GRID */
 .contact-content {
     max-width: 800px;
     margin: 0 auto;
@@ -449,6 +479,16 @@ a:hover {
 
 .contact-form {
     margin-top: var(--spacing-md);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--spacing-md);
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
 }
 
 .form-group {
@@ -482,7 +522,6 @@ a:hover {
     resize: vertical;
 }
 
-/* Form Validation Styles - Week 7 Addition */
 .error-message {
     color: #dc2626;
     font-size: 0.875rem;
@@ -510,7 +549,6 @@ a:hover {
     font-weight: 500;
 }
 
-/* Footer */
 .footer {
     background: var(--bg-dark);
     color: var(--white);
@@ -538,11 +576,40 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* Responsive Design - Basic */
+.text-center { text-align: center; }
+
 @media (max-width: 768px) {
+    #navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .nav-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: var(--spacing-sm);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
     h1 { font-size: 2rem; }
     h2 { font-size: 1.75rem; }
-
     .hero-title { font-size: 2.5rem; }
     .hero-subtitle { font-size: 1.25rem; }
 
@@ -551,8 +618,18 @@ a:hover {
     }
 }
 
+@media (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
 /* Utility Classes */
-.text-center { text-align: center; }
 .mt-1 { margin-top: var(--spacing-sm); }
 .mt-2 { margin-top: var(--spacing-md); }
 .mt-3 { margin-top: var(--spacing-lg); }
